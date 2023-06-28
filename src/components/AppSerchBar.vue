@@ -1,14 +1,15 @@
  <script>
+ import { store } from '../store.js';
         export default {
           data() {
             return {
-                searchText:''
+                store
             }
           },
           methods: {
-            sendSearch(){
-                console.log(this.searchText);
-            }
+            // sendSearch(){
+            //     this.$emit('search');
+            // }
           },  
         }
  </script>
@@ -18,7 +19,7 @@
             <div class="col-6 offset-3">
                 <div class="d-flex my-4">
                     
-                        <input type="text" v-model="searchText" class="from-control me-2" placeholder=" Search film" @keyup.enter="$emit('search')">
+                        <input type="text" v-model="store.searchText" class="from-control me-2" placeholder=" Search film" @keyup.enter="$emit('search')">
                         <button class="btn btn-sm btn-primary" @click="$emit('search')">Search </button>
                     
                 </div>

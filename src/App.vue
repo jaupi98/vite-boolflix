@@ -20,14 +20,24 @@ import { store } from './store';
             }
         },
       mounted() {
-            axios.get(store.apiUrl).then((response) =>{
+           this.getFilm()
+        },
+        methods: {
+          getFilm(){
+            //  console.log(store.serchText);
+            // RECUPERO IL MIO ENDPOINT
+            let myUrl = store.apiUrl;
+
+            if (store.searchText !== '') {
+              myUrl += `?title=${store.searchText}`;
+              
+            }
+
+            axios.get(myUrl).then((response) =>{
                 store.filmList = response.data.results;
                 store.loading = false;
             })
-        },
-        methods: {
-          searchFilm(){
-            console.log('EMIT FUNZIONANTE')
+
           }
         }     
     }
@@ -35,7 +45,7 @@ import { store } from './store';
 <template lang="">
   <div>
     <AppHeader title ="boolflix"/>
-    <AppSerchBar @search="searchFilm"/>
+    <AppSerchBar @search="getFilm"/>
     <AppFilmList/>
   </div>
 </template>
