@@ -20,7 +20,11 @@ import { store } from './store';
             }
         },
       mounted() {
-           this.getFilm()
+           this.getFilm();
+           axios.get('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=e5bcdd9db0714a9e718357e96cd962be').then((response) =>{
+
+              store.filmList = response.data.results;
+           })
         },
         methods: {
           getFilm(){
@@ -29,7 +33,7 @@ import { store } from './store';
             let myUrl = store.apiUrl;
 
             if (store.searchText !== '') {
-              myUrl += `?title=${store.searchText}`;
+              myUrl += `&query=${store.searchText}`;
               
             }
 

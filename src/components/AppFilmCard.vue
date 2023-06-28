@@ -9,6 +9,7 @@
     <div class=" film text-center">
         <!-- <img :src="myFilm.poster_path" class="img-fluid mb-3" alt=""> -->
         <img src="./img/avatar_1.jpg" alt="">
+        <pre>{{myFilm.poster_path}}</pre>
         <p>{{myFilm.title}}</p>
         <p>{{myFilm.original_title}}</p>
         <p>{{myFilm.vote_average}}</p>
