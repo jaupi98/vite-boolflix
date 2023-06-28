@@ -1,34 +1,32 @@
 <script>
-import axios from 'axios';
+
+import AppFilmCard from './AppFilmCard.vue';
+import AppLoader from './AppLoader.vue';
+
+import { store } from '../store.js';
 
     export default {
-        data() {
-            return {
-            
-                filmList: []
-            }
+        components:{
+            AppFilmCard,
+            AppLoader
         },
-        mounted() {
-            axios.get('https://api.themoviedb.org/3/search/movie?api_key=e5bcdd9db0714a9e718357e96cd962be&query=ritorno+al+fut').then((response) =>{
-                this.filmList = response.data.results;
-            })
-        }           
+        data(){
+            return{
+                store
+            }
+        }            
     }
 </script>
 <template lang="">
-    <div>
+    
         <div clas="container">
-            <div class="row">
-                
-                <div v-for="(film,index)  in filmList" :key="index" class="col-2">
-                    <div>{{film.title}}</div>
-                    <div>{{film.original_title}}</div>
-                    <div>{{film.vote_avarage}}</div>
-                    <div>{{film.overview}}</div>
-                </div>
+            <div class="row" v-if="store.loading === false">
+                    <div v-for="(film,index)  in store.filmList" :key="index" class="col-6 col-lg-3 ">
+                    <AppFilmCard :myFilm="film"/> 
+                    </div>              
             </div>
+            <AppLoader v-else/>
         </div>
-    </div>
 </template>
 <style lang="">
     
